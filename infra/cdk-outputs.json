@@ -1,0 +1,12 @@
+{
+  "GesProyectos": {
+    "UserPoolClientId": "5f5fi226tld0veph370cpmtgvi",
+    "TableName": "GesProyectos-TableCD117FA1-6XZKQK0PMBBX",
+    "ApiUrl": "https://sht2o75umj.execute-api.us-east-1.amazonaws.com",
+    "UserPoolId": "us-east-1_28oOVFLbG",
+    "CloudFrontUrl": "https://d38f3ghodesfrz.cloudfront.net",
+    "Region": "us-east-1",
+    "SiteBucketName": "gesproyectos-sitebucket397a1860-uf0zqscv5ovl",
+    "DistributionId": "EOT85ALHUTESA"
+  }
+}

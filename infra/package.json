@@ -1,0 +1,27 @@
+{
+  "name": "infra",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Infraestructura AWS CDK de la Plataforma de Seguimiento de Proyectos",
+  "bin": { "infra": "bin/app.js" },
+  "scripts": {
+    "synth": "cdk synth",
+    "deploy": "cdk deploy --all --require-approval never --outputs-file cdk-outputs.json",
+    "deploy:frontend": "node scripts/deploy-frontend.mjs",
+    "destroy": "cdk destroy --all",
+    "diff": "cdk diff"
+  },
+  "dependencies": {
+    "aws-cdk-lib": "^2.160.0",
+    "constructs": "^10.3.0"
+  },
+  "devDependencies": {
+    "@aws-sdk/client-cloudfront": "^3.658.0",
+    "@aws-sdk/client-s3": "^3.658.0",
+    "@types/node": "^20.14.0",
+    "aws-cdk": "^2.160.0",
+    "esbuild": "^0.23.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.5.4"
+  }
+}

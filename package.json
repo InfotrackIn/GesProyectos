@@ -1,0 +1,21 @@
+{
+  "name": "gesproyectos",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Plataforma de Seguimiento de Proyectos (PMO / Implementacion Interna / CSM)",
+  "workspaces": [
+    "backend",
+    "infra",
+    "frontend"
+  ],
+  "scripts": {
+    "build:backend": "npm run build --workspace backend",
+    "build:frontend": "npm run build --workspace frontend",
+    "synth": "npm run synth --workspace infra",
+    "deploy": "npm run deploy --workspace infra",
+    "deploy:frontend": "npm run deploy:frontend --workspace infra"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
