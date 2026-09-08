@@ -126,9 +126,9 @@ export default function Weekly() {
             className="input w-auto py-1.5"
             value={year === "ALL" ? "ALL" : String(year)}
             onChange={(e) => setYear(e.target.value === "ALL" ? "ALL" : Number(e.target.value))}
-            title="Ano"
+            title="Año"
           >
-            <option value="ALL">Todos los anos</option>
+            <option value="ALL">Todos los años</option>
             {yearOptions().map((y) => (
               <option key={y} value={y}>
                 {y}
