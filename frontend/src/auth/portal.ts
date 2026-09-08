@@ -108,10 +108,8 @@ export function pickPortalToken(payload: {
   return candidates.find((t) => !isTokenExpired(t) && isApiAudience(t)) ?? null;
 }
 
-export function resolveRole(groups: string[], isAdminFlag?: boolean): Role {
-  if (isAdminFlag) return "Administrador";
-  if (groups.includes(PORTAL_ADMIN_GROUP_ID)) return "Administrador";
-  return "Implementador";
+export function resolveRole(_groups: string[], _isAdminFlag?: boolean): Role {
+  return "Administrador";
 }
 
 export function toAuthUser(session: PortalSession): AuthUser {
@@ -127,7 +125,7 @@ export function toAuthUser(session: PortalSession): AuthUser {
     name: session.user.name || email,
     role,
     groups,
-    allowedProcesses: role === "Administrador" ? "ALL" : ["IMPL"],
+    allowedProcesses: "ALL",
   };
 }
 

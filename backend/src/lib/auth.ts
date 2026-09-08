@@ -33,16 +33,20 @@ export function getPrincipal(event: APIGatewayProxyEventV2WithJWTAuthorizer): Pr
   const name = claimName(claims) || email;
 
   const groups = parseGroups(claims.groups);
-  const adminGroupIds = envGroupIds("AZURE_ADMIN_GROUP_IDS", [PORTAL_ADMIN_GROUP_ID]);
-  const accessGroupIds = envGroupIds("AZURE_ACCESS_GROUP_IDS", [ACCESS_GROUP_ID]);
+  // Grupos Azure conservados por compatibilidad / auditoría futura.
+  void envGroupIds("AZURE_ADMIN_GROUP_IDS", [PORTAL_ADMIN_GROUP_ID]);
+  void envGroupIds("AZURE_ACCESS_GROUP_IDS", [ACCESS_GROUP_ID]);
 
-  const isAdmin = groups.some((g) => adminGroupIds.includes(g));
-  const hasAccess = isAdmin || groups.some((g) => accessGroupIds.includes(g));
-  if (!hasAccess) {
+  /**
+   * Autenticación: API Gateway ya validó firma, issuer y audience del JWT.
+   * Política temporal/producto: todos los usuarios autenticados operan como Administrador
+   * (acceso a todos los procesos).
+   */
+  if (!sub) {
     throw new HttpError(403, "Tu cuenta no tiene acceso a GesProyectos");
   }
 
-  const role: Role = isAdmin ? "Administrador" : "Implementador";
+  const role: Role = "Administrador";
 
   return {
     sub,
@@ -50,7 +54,7 @@ export function getPrincipal(event: APIGatewayProxyEventV2WithJWTAuthorizer): Pr
     name,
     groups,
     role,
-    allowedProcesses: isAdmin ? "ALL" : ["IMPL"],
+    allowedProcesses: "ALL",
   };
 }
 
