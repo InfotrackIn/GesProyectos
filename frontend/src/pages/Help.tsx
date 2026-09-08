@@ -162,9 +162,9 @@ function IntroSection() {
   <>
     <P>
       La <strong>Plataforma de Seguimiento de Proyectos</strong> centraliza el estado de las
-      iniciativas del equipo, separando tres lineas de trabajo: <Tag color="violet">PMO</Tag>,{" "}
-      <Tag color="cyan">Implementacion Interna</Tag> y <Tag color="pink">CSM</Tag> (Customer
-      Success Manager).
+      iniciativas del equipo, separando cuatro lineas de trabajo: <Tag color="violet">PMO</Tag>,{" "}
+      <Tag color="cyan">Implementacion Interna</Tag>, <Tag color="pink">CSM</Tag> (Customer
+      Success Manager) e <Tag color="green">I+D+I</Tag>.
     </P>
     <P>Con esta herramienta puedes:</P>
     <Ul>
@@ -193,7 +193,7 @@ function RolesSection() {
         title="Administrador"
         who="Director de Operaciones, Lider de PMO + Implementacion, CSM"
         permissions={[
-          "Acceso completo a todos los procesos (PMO, Implementacion, CSM).",
+          "Acceso completo a todos los procesos (PMO, Implementacion, CSM, I+D+I).",
           "Crear, editar y eliminar proyectos de cualquier proceso.",
           "Gestionar el cronograma de tareas de cualquier proyecto.",
           "Gestionar el Panel Ejecutivo (metas, alertas, tareas, modulos).",
@@ -250,8 +250,9 @@ function NavigationSection() {
     <H3>Filtro por proceso</H3>
     <P>
       Disponible en todas las pestanas excepto el Panel Ejecutivo. Opciones:{" "}
-      <strong>Todos</strong>, <strong>PMO</strong>, <strong>Implementacion Interna</strong> o{" "}
-      <strong>CSM</strong>. El filtro afecta los datos visibles en la pestana actual.
+      <strong>Todos</strong>, <strong>PMO</strong>, <strong>Implementacion Interna</strong>,{" "}
+      <strong>CSM</strong> o <strong>I+D+I</strong>. El filtro afecta los datos visibles en la
+      pestana actual.
     </P>
     <H3>Filtros de fecha (Seguimiento Semanal)</H3>
     <P>
@@ -346,7 +347,7 @@ function WeeklySection() {
     </P>
     <H3>Informacion visible en la tarjeta</H3>
     <Ul>
-      <li>Etiqueta de proceso (PMO, Implementacion, CSM).</li>
+      <li>Etiqueta de proceso (PMO, Implementacion, CSM, I+D+I).</li>
       <li>Estado del proyecto (Sin iniciar / En progreso / Standby / Completado).</li>
       <li>Salud (En control / En riesgo / Critico).</li>
       <li>Responsable del proyecto.</li>
@@ -535,7 +536,7 @@ function AdminSection() {
       <li>Completa los campos:
         <Ul>
           <li><strong>Nombre, categoria y responsable.</strong></li>
-          <li><strong>Proceso:</strong> PMO, Implementacion Interna o CSM.</li>
+          <li><strong>Proceso:</strong> PMO, Implementacion Interna, CSM o I+D+I.</li>
           <li><strong>Estado del proyecto:</strong> Sin iniciar, En progreso, Standby o Completado.</li>
           <li><strong>Salud:</strong> En control, En riesgo o Critico.</li>
           <li><strong>Fecha inicio, fecha tentativa fin y fecha deal</strong> (para medir desfase).</li>
@@ -614,6 +615,7 @@ function ConceptsSection() {
         ["PMO", "Seguimiento de proyectos de cara al cliente y su cronograma.", "Si"],
         ["Implementacion Interna", "Despliegues tecnicos internos sin contacto directo de encuesta.", "No"],
         ["CSM", "Seguimiento post-venta y satisfaccion del cliente.", "Si"],
+        ["I+D+I", "Proyectos de innovacion y PMV (prototipos, demos y productos emergentes).", "No"],
       ]}
     />
 
@@ -792,7 +794,7 @@ function Tip({ children }: { children: React.ReactNode }) {
   );
 }
 
-function Tag({ children, color }: { children: React.ReactNode; color: "violet" | "cyan" | "pink" | "red" | "orange" | "yellow" }) {
+function Tag({ children, color }: { children: React.ReactNode; color: "violet" | "cyan" | "pink" | "red" | "orange" | "yellow" | "green" }) {
   const colors = {
     violet: "bg-violet-100 text-violet-700",
     cyan: "bg-cyan-100 text-cyan-700",
@@ -800,6 +802,7 @@ function Tag({ children, color }: { children: React.ReactNode; color: "violet" |
     red: "bg-rose-100 text-rose-700",
     orange: "bg-orange-100 text-orange-700",
     yellow: "bg-yellow-100 text-yellow-700",
+    green: "bg-emerald-100 text-emerald-700",
   };
   return (
     <span className={clsx("rounded px-1.5 py-0.5 text-xs font-medium", colors[color])}>

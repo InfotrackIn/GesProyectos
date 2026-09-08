@@ -108,6 +108,61 @@ export async function seed(principal: Principal) {
       monthlyRevenue: 9000,
       totalValue: 108000,
     },
+    // --- I+D+I: fechas alineadas a formatos FOS-ID-002 / FOS-ID-003 de cada PMV ---
+    {
+      name: "PMV FaceTrack — Reconocimiento facial",
+      category: "PMV / Biometria",
+      process: "IDI",
+      status: "control",
+      phase: "completado",
+      owner: "Equipo I+D+I",
+      startDate: "2025-05-15",
+      endDatePlanned: "2026-07-14",
+      endDateDeal: "2026-07-14",
+      progressMode: "manual",
+      manualProgress: 100,
+      plannedSetupCost: 0,
+      plannedRecurringCost: 900,
+      realCost: 0,
+      monthlyRevenue: 0,
+      totalValue: 0,
+    },
+    {
+      name: "PMV SmartPick OCR — Pedidos inteligentes",
+      category: "PMV / IA conversacional",
+      process: "IDI",
+      status: "control",
+      phase: "completado",
+      owner: "Equipo I+D+I",
+      startDate: "2026-05-30",
+      endDatePlanned: "2026-07-14",
+      endDateDeal: "2026-07-14",
+      progressMode: "manual",
+      manualProgress: 100,
+      plannedSetupCost: 0,
+      plannedRecurringCost: 0,
+      realCost: 0,
+      monthlyRevenue: 0,
+      totalValue: 0,
+    },
+    {
+      name: "PMV CRIOVAX FrioRFID — Cadena de frio RFID",
+      category: "PMV / RFID y demo",
+      process: "IDI",
+      status: "control",
+      phase: "completado",
+      owner: "Equipo I+D+I",
+      startDate: "2026-05-15",
+      endDatePlanned: "2026-07-14",
+      endDateDeal: "2026-07-14",
+      progressMode: "manual",
+      manualProgress: 100,
+      plannedSetupCost: 0,
+      plannedRecurringCost: 0,
+      realCost: 0,
+      monthlyRevenue: 0,
+      totalValue: 0,
+    },
   ];
 
   const projects: Project[] = baseProjects.map((p) => ({
@@ -197,6 +252,74 @@ export async function seed(principal: Principal) {
     updatedAt: nowIso,
   });
 
+  // Cronogramas I+D+I alineados a sprints de FOS-ID-002 / FOS-ID-003
+  const idiSchedules: {
+    nameIncludes: string;
+    phases: { name: string; start: string; end: string }[];
+  }[] = [
+    {
+      nameIncludes: "FaceTrack",
+      phases: [
+        { name: "Sprint 1 — Infra y autenticacion", start: "2025-05-15", end: "2025-05-15" },
+        { name: "Sprint 2 — Registro y reconocimiento", start: "2025-05-30", end: "2025-05-30" },
+        { name: "Sprint 3 — Reportes y liquidacion CST", start: "2025-06-20", end: "2025-06-20" },
+        { name: "Sprint 4 — Documentacion y entrega PMV", start: "2026-07-14", end: "2026-07-14" },
+      ],
+    },
+    {
+      nameIncludes: "SmartPick",
+      phases: [
+        { name: "Sprint 1 — Bot + OCR IA + persistencia", start: "2026-05-30", end: "2026-05-30" },
+        { name: "Sprint 2 — API SmartPick + UI + AWS", start: "2026-07-14", end: "2026-07-14" },
+      ],
+    },
+    {
+      nameIncludes: "CRIOVAX",
+      phases: [
+        { name: "Sprint 1 — Infra API + DynamoDB + seed RFID", start: "2026-05-15", end: "2026-05-15" },
+        { name: "Sprint 2 — Experiencia RFID + consola web", start: "2026-06-15", end: "2026-06-15" },
+        { name: "Sprint 3 — Polly y entrega PMV", start: "2026-07-14", end: "2026-07-14" },
+      ],
+    },
+  ];
+  for (const sched of idiSchedules) {
+    const project = projects.find((p) => p.process === "IDI" && p.name.includes(sched.nameIncludes));
+    if (!project) continue;
+    for (let i = 0; i < sched.phases.length; i++) {
+      const ph = sched.phases[i];
+      const phaseId = newId();
+      await repo.putSchedulePhase({
+        id: phaseId,
+        projectId: project.id,
+        name: ph.name,
+        description: `Hito FOS / PMV — fecha ${ph.end}`,
+        startDate: ph.start,
+        endDate: ph.end,
+        status: "completada",
+        completedAt: ph.end,
+        weight: 1,
+        order: i + 1,
+        createdAt: nowIso,
+        updatedAt: nowIso,
+      });
+      await repo.putScheduleTask({
+        id: newId(),
+        projectId: project.id,
+        phaseId,
+        name: `Cierre ${ph.name}`,
+        description: "Hito alineado a formato de entrega PMV (auditoria I+D+I)",
+        startDate: ph.start,
+        endDate: ph.end,
+        status: "completada",
+        completedAt: ph.end,
+        weight: 1,
+        order: 1,
+        createdAt: nowIso,
+        updatedAt: nowIso,
+      });
+    }
+  }
+
   // Encuestas (PMO y CSM)
   await repo.putSurvey({
     process: "PMO",
@@ -245,6 +368,9 @@ export async function seed(principal: Principal) {
   await repo.putControl({ id: newId(), month, week: "S1", process: "PMO", team: "PMO", responsibles: ["Ana", "Luis"], status: "alDia" });
   await repo.putControl({ id: newId(), month, week: "S1", process: "IMPL", team: "Implementacion", responsibles: ["Marco"], status: "pendiente" });
   await repo.putControl({ id: newId(), month, week: "S1", process: "CSM", team: "CSM", responsibles: ["Sofia"], status: "alDia" });
+  await repo.putControl({ id: newId(), month, week: "S1", process: "IDI", team: "I+D+I", responsibles: ["Equipo I+D+I"], status: "alDia" });
+
+  await repo.putKpi({ id: newId(), process: "IDI", month, name: "PMV entregados", value: 3, goal: 3 });
 
   await repo.putModule({
     process: "PMO",
@@ -290,6 +416,21 @@ export async function seed(principal: Principal) {
       { label: "Standby", value: "0" },
     ],
     updateStatus: "enConstruccion",
+  });
+  await repo.putModule({
+    process: "IDI",
+    month,
+    totalProjects: 3,
+    breakdown: [
+      { label: "Completados", count: 3 },
+      { label: "En progreso", count: 0 },
+      { label: "En riesgo", count: 0 },
+    ],
+    metrics: [
+      { label: "Avance", value: "100%" },
+      { label: "PMV", value: "3" },
+    ],
+    updateStatus: "alDia",
   });
 
   return { seeded: true, projects: projects.length, month };

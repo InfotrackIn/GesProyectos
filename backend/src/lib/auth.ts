@@ -12,7 +12,7 @@ export interface Principal {
   allowedProcesses: Process[] | "ALL";
 }
 
-const ALL_PROCESSES: Process[] = ["PMO", "IMPL", "CSM"];
+const ALL_PROCESSES: Process[] = ["PMO", "IMPL", "CSM", "IDI"];
 const PORTAL_ADMIN_GROUP_ID = "5e362b7a-7539-4b0f-87ef-acb878e9deeb";
 const ACCESS_GROUP_ID = "090658b1-85fc-4026-a82c-1d549258d213";
 

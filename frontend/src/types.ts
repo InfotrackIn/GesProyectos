@@ -1,4 +1,4 @@
-export type Process = "PMO" | "IMPL" | "CSM";
+export type Process = "PMO" | "IMPL" | "CSM" | "IDI";
 export type ProcessFilter = Process | "ALL";
 export type ProjectStatus = "control" | "riesgo" | "critico";
 export type ProjectPhase = "sin_iniciar" | "en_progreso" | "standby" | "completado";

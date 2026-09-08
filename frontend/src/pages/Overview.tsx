@@ -147,7 +147,7 @@ export default function Overview() {
           <Card>
             <h3 className="mb-3 font-semibold text-slate-900">Resumen de encuestas</h3>
             <p className="p-6 text-center text-sm text-slate-500">
-              Implementacion Interna no maneja indicadores de satisfaccion.
+              Implementacion Interna e I+D+I no manejan indicadores de satisfaccion.
             </p>
           </Card>
         )}

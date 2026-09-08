@@ -68,7 +68,7 @@ export class GesProyectosStack extends cdk.Stack {
     new cognito.CfnUserPoolGroup(this, "AdminGroup", {
       userPoolId: userPool.userPoolId,
       groupName: "Administrador",
-      description: "Acceso completo a todos los procesos (PMO, Implementacion, CSM)",
+      description: "Acceso completo a todos los procesos (PMO, Implementacion, CSM, I+D+I)",
     });
     new cognito.CfnUserPoolGroup(this, "ImplGroup", {
       userPoolId: userPool.userPoolId,

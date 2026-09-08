@@ -333,6 +333,7 @@ export default function Admin() {
                 <option value="PMO">PMO</option>
                 <option value="IMPL">Implementacion Interna</option>
                 <option value="CSM">CSM</option>
+                <option value="IDI">I+D+I</option>
               </select>
             </Field>
             <Field label="Estado del proyecto">

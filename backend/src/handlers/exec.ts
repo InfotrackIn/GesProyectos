@@ -15,7 +15,7 @@ import type {
   WeeklyControl,
 } from "../shared/types.js";
 
-const PROCESSES: Process[] = ["PMO", "IMPL", "CSM"];
+const PROCESSES: Process[] = ["PMO", "IMPL", "CSM", "IDI"];
 const SEVERITIES: Severity[] = ["critico", "alto", "medio"];
 
 /** Epica 8: etiqueta de cumplimiento a partir de valor y meta. */

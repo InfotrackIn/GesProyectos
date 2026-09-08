@@ -1,7 +1,7 @@
-# Plataforma de Seguimiento de Proyectos (PMO / Implementacion / CSM)
+# Plataforma de Seguimiento de Proyectos (PMO / Implementacion / CSM / I+D+I)
 
 Tablero para centralizar el seguimiento de proyectos, separando los procesos de
-**PMO**, **Implementacion Interna** y **CSM**, con calculo automatico de avance,
+**PMO**, **Implementacion Interna**, **CSM** e **I+D+I**, con calculo automatico de avance,
 comparacion de costos, indicadores NPS/CSAT, panel ejecutivo con metas mensuales,
 alertas, tareas y control de actualizacion semanal.
 
@@ -92,7 +92,7 @@ las encuestas se registran manualmente.
 
 ## Roles
 
-- **Administrador**: acceso completo a todos los procesos (PMO, Implementacion, CSM).
+- **Administrador**: acceso completo a todos los procesos (PMO, Implementacion, CSM, I+D+I).
 - **Implementador**: solo visualiza y edita proyectos de Implementacion Interna.
 
 ## Desarrollo local

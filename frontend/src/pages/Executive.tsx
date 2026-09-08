@@ -211,6 +211,7 @@ function KpiSection({
                 <option value="PMO">PMO</option>
                 <option value="IMPL">Implementacion</option>
                 <option value="CSM">CSM</option>
+                <option value="IDI">I+D+I</option>
               </select>
             </Field>
             <Field label="Valor">
@@ -432,6 +433,7 @@ function AlertsSection({
                 <option value="PMO">PMO</option>
                 <option value="IMPL">Implementacion</option>
                 <option value="CSM">CSM</option>
+                <option value="IDI">I+D+I</option>
               </select>
             </Field>
             <Field label="Severidad">
@@ -650,6 +652,7 @@ function ControlsSection({
                 <option value="PMO">PMO</option>
                 <option value="IMPL">Implementacion</option>
                 <option value="CSM">CSM</option>
+                <option value="IDI">I+D+I</option>
               </select>
             </Field>
           </div>
@@ -701,7 +704,10 @@ function ModalActions({ onCancel, onSave }: { onCancel: () => void; onSave: () =
 }
 
 function borderColor(p: Process): string {
-  return p === "PMO" ? "border-t-violet-400" : p === "IMPL" ? "border-t-cyan-400" : "border-t-pink-400";
+  if (p === "PMO") return "border-t-violet-400";
+  if (p === "IMPL") return "border-t-cyan-400";
+  if (p === "CSM") return "border-t-pink-400";
+  return "border-t-emerald-400";
 }
 
 function updateArr(

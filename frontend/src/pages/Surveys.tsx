@@ -100,7 +100,7 @@ export default function Surveys() {
       )}
 
       <p className="text-sm text-slate-500">
-        Solo aplica a PMO y CSM. Implementacion Interna no maneja indicadores de satisfaccion.
+        Solo aplica a PMO y CSM. Implementacion Interna e I+D+I no manejan indicadores de satisfaccion.
       </p>
 
       {loading ? (

@@ -10,7 +10,7 @@ export default function Login() {
             SP
           </div>
           <h1 className="text-xl font-semibold text-slate-900">Seguimiento de Proyectos</h1>
-          <p className="text-sm text-slate-500">PMO · Implementacion Interna · CSM</p>
+          <p className="text-sm text-slate-500">PMO · Implementacion Interna · CSM · I+D+I</p>
         </div>
 
         {!isConfigured && (

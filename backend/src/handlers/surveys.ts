@@ -6,7 +6,7 @@ import * as repo from "../lib/repo.js";
 import { getSupabaseConfig } from "../lib/ssm.js";
 import { SURVEY_PROCESSES, type Process, type Survey } from "../shared/types.js";
 
-const PROCESSES: Process[] = ["PMO", "IMPL", "CSM"];
+const PROCESSES: Process[] = ["PMO", "IMPL", "CSM", "IDI"];
 
 export async function list(principal: Principal) {
   const all = await repo.listSurveys();
@@ -105,6 +105,7 @@ function mapProcess(value: unknown): Process | null {
   if (v.includes("PMO")) return "PMO";
   if (v.includes("CSM")) return "CSM";
   if (v.includes("IMPL")) return "IMPL";
+  if (v.includes("IDI") || v.includes("I+D") || v.includes("I+D+I")) return "IDI";
   return null;
 }
 

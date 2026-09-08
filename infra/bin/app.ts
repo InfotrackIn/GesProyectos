@@ -9,5 +9,5 @@ new GesProyectosStack(app, "GesProyectos", {
     account: process.env.CDK_DEFAULT_ACCOUNT,
     region: process.env.CDK_DEFAULT_REGION ?? "us-east-1",
   },
-  description: "Plataforma de Seguimiento de Proyectos (PMO / Implementacion / CSM)",
+  description: "Plataforma de Seguimiento de Proyectos (PMO / Implementacion / CSM / I+D+I)",
 });

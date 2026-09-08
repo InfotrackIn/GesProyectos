@@ -2,7 +2,7 @@
   "name": "gesproyectos",
   "version": "1.0.0",
   "private": true,
-  "description": "Plataforma de Seguimiento de Proyectos (PMO / Implementacion Interna / CSM)",
+  "description": "Plataforma de Seguimiento de Proyectos (PMO / Implementacion Interna / CSM / I+D+I)",
   "workspaces": [
     "backend",
     "infra",

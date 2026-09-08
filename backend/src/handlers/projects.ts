@@ -16,7 +16,7 @@ import type {
   WeeklyUpdate,
 } from "../shared/types.js";
 
-const PROCESSES: Process[] = ["PMO", "IMPL", "CSM"];
+const PROCESSES: Process[] = ["PMO", "IMPL", "CSM", "IDI"];
 const STATUSES: ProjectStatus[] = ["control", "riesgo", "critico"];
 const PHASES: ProjectPhase[] = ["sin_iniciar", "en_progreso", "standby", "completado"];
 

@@ -13,6 +13,7 @@ export const PROCESS_LABEL: Record<Process, string> = {
   PMO: "PMO",
   IMPL: "Implementacion Interna",
   CSM: "CSM",
+  IDI: "I+D+I",
 };
 
 export const PROCESS_FILTERS: { value: ProcessFilter; label: string }[] = [
@@ -20,12 +21,14 @@ export const PROCESS_FILTERS: { value: ProcessFilter; label: string }[] = [
   { value: "PMO", label: "PMO" },
   { value: "IMPL", label: "Implementacion Interna" },
   { value: "CSM", label: "CSM" },
+  { value: "IDI", label: "I+D+I" },
 ];
 
 export const PROCESS_COLOR: Record<Process, string> = {
   PMO: "bg-violet-100 text-violet-700 border-violet-200",
   IMPL: "bg-cyan-100 text-cyan-700 border-cyan-200",
   CSM: "bg-pink-100 text-pink-700 border-pink-200",
+  IDI: "bg-emerald-100 text-emerald-700 border-emerald-200",
 };
 
 export const STATUS_LABEL: Record<ProjectStatus, string> = {

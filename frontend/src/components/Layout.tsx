@@ -33,7 +33,7 @@ export default function Layout({ children }: { children: ReactNode }) {
             </div>
             <div className="leading-tight">
               <div className="text-sm font-semibold text-slate-900">Seguimiento de Proyectos</div>
-              <div className="text-xs text-slate-500">PMO · Implementacion · CSM</div>
+              <div className="text-xs text-slate-500">PMO · Implementacion · CSM · I+D+I</div>
             </div>
           </div>
 

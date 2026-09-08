@@ -1,4 +1,4 @@
-export type Process = "PMO" | "IMPL" | "CSM";
+export type Process = "PMO" | "IMPL" | "CSM" | "IDI";
 
 export type ProjectStatus = "control" | "riesgo" | "critico";
 
