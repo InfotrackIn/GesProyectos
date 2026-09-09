@@ -12,3 +12,6 @@ export const ddb = DynamoDBDocumentClient.from(client, {
 
 export const TABLE = process.env.TABLE_NAME as string;
 export const GSI1 = "GSI1";
+
+export const SLA_TABLE = process.env.SLA_TABLE_NAME as string;
+export const SLA_PROYECTO_INDEX = "ProyectoIndex";

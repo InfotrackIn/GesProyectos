@@ -3,8 +3,9 @@ import {
   GetCommand,
   PutCommand,
   QueryCommand,
+  ScanCommand,
 } from "@aws-sdk/lib-dynamodb";
-import { ddb, TABLE, GSI1 } from "./dynamo.js";
+import { ddb, TABLE, GSI1, SLA_TABLE, SLA_PROYECTO_INDEX } from "./dynamo.js";
 import type {
   Alert,
   AuditEvent,
@@ -13,6 +14,7 @@ import type {
   Project,
   SchedulePhase,
   ScheduleTask,
+  Sla,
   Survey,
   Task,
   WeeklyControl,
@@ -366,6 +368,70 @@ async function putExecItem(pk: string, sk: string, type: string, body: object): 
       Item: { PK: pk, SK: sk, type, ...body },
     })
   );
+}
+
+// ------------------------------ SLA --------------------------------
+
+export async function listSlas(): Promise<Sla[]> {
+  const items: Sla[] = [];
+  let ExclusiveStartKey: Record<string, unknown> | undefined;
+  do {
+    const res = await ddb.send(
+      new ScanCommand({
+        TableName: SLA_TABLE,
+        ExclusiveStartKey,
+      })
+    );
+    for (const item of res.Items ?? []) {
+      items.push(item as Sla);
+    }
+    ExclusiveStartKey = res.LastEvaluatedKey as Record<string, unknown> | undefined;
+  } while (ExclusiveStartKey);
+  return items;
+}
+
+export async function getSla(id: string): Promise<Sla | null> {
+  const res = await ddb.send(
+    new GetCommand({ TableName: SLA_TABLE, Key: { id } })
+  );
+  return res.Item ? (res.Item as Sla) : null;
+}
+
+export async function putSla(sla: Sla): Promise<Sla> {
+  await ddb.send(
+    new PutCommand({
+      TableName: SLA_TABLE,
+      Item: sla,
+    })
+  );
+  return sla;
+}
+
+export async function deleteSla(id: string): Promise<void> {
+  await ddb.send(
+    new DeleteCommand({ TableName: SLA_TABLE, Key: { id } })
+  );
+}
+
+export async function listSlasByProyecto(proyecto: string): Promise<Sla[]> {
+  const items: Sla[] = [];
+  let ExclusiveStartKey: Record<string, unknown> | undefined;
+  do {
+    const res = await ddb.send(
+      new QueryCommand({
+        TableName: SLA_TABLE,
+        IndexName: SLA_PROYECTO_INDEX,
+        KeyConditionExpression: "proyecto = :proyecto",
+        ExpressionAttributeValues: { ":proyecto": proyecto },
+        ExclusiveStartKey,
+      })
+    );
+    for (const item of res.Items ?? []) {
+      items.push(item as Sla);
+    }
+    ExclusiveStartKey = res.LastEvaluatedKey as Record<string, unknown> | undefined;
+  } while (ExclusiveStartKey);
+  return items;
 }
 
 // ------------------------------ helpers ------------------------------

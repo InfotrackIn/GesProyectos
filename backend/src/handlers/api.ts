@@ -11,6 +11,7 @@ import * as overview from "./overview.js";
 import * as exec from "./exec.js";
 import * as schedule from "./schedule.js";
 import * as audit from "./audit.js";
+import * as sla from "./sla.js";
 import { seed } from "./seed.js";
 
 export async function handler(
@@ -131,6 +132,29 @@ export async function handler(
       }
       if (parts.length === 2 && parts[1] === "sync" && method === "POST") {
         return ok(await surveys.syncFromSupabase(principal));
+      }
+    }
+
+    // ------------------------------ sla ---------------------------------
+    if (parts[0] === "sla") {
+      // /sla
+      if (parts.length === 1) {
+        if (method === "GET") return ok(await sla.list(principal));
+        if (method === "POST") return ok(await sla.create(principal, body), 201);
+      }
+      // /sla/proyecto/{proyecto}  (antes de /sla/{id})
+      if (parts.length === 3 && parts[1] === "proyecto" && method === "GET") {
+        return ok(await sla.listByProyecto(principal, parts[2]));
+      }
+      // /sla/{id}
+      if (parts.length === 2) {
+        const id = parts[1];
+        if (method === "GET") return ok(await sla.getOne(principal, id));
+        if (method === "PUT") return ok(await sla.update(principal, id, body));
+        if (method === "DELETE") {
+          await sla.remove(principal, id);
+          return noContent();
+        }
       }
     }
 
