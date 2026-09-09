@@ -14,6 +14,7 @@ import type {
   Task,
   WeeklyControl,
   WeeklyUpdate,
+  Sla,
 } from "../types";
 
 async function request<T>(method: string, path: string, body?: unknown): Promise<T> {
@@ -121,6 +122,15 @@ export const api = {
   listSurveys: () => request<Survey[]>("GET", "/surveys"),
   upsertSurvey: (s: Partial<Survey>) => request<Survey>("POST", "/surveys", s),
   syncSurveys: () => request<{ configured: boolean; imported: number; message?: string }>("POST", "/surveys/sync"),
+
+  // ANS (backend: /sla)
+  listSlas: () => request<Sla[]>("GET", "/sla"),
+  getSla: (id: string) => request<Sla>("GET", `/sla/${id}`),
+  createSla: (s: Omit<Sla, "id"> | Partial<Sla>) => request<Sla>("POST", "/sla", s),
+  updateSla: (id: string, s: Partial<Sla>) => request<Sla>("PUT", `/sla/${id}`, s),
+  deleteSla: (id: string) => request<void>("DELETE", `/sla/${id}`),
+  listSlasByProyecto: (proyecto: string) =>
+    request<Sla[]>("GET", `/sla/proyecto/${encodeURIComponent(proyecto)}`),
 
   // Panel ejecutivo
   execPanel: (process: ProcessFilter, month: string) =>

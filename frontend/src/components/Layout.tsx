@@ -11,6 +11,7 @@ const TABS = [
   { to: "/", label: "Vista General", end: true },
   { to: "/semanal", label: "Seguimiento Semanal" },
   { to: "/encuestas", label: "Encuestas" },
+  { to: "/ans", label: "ANS y Proyectos" },
   { to: "/ejecutivo", label: "Panel Ejecutivo" },
   { to: "/admin", label: "Panel Admin" },
   { to: "/auditoria", label: "Auditoria" },

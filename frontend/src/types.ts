@@ -210,6 +210,28 @@ export interface Survey {
   updatedAt: string;
 }
 
+/** Registro ANS (backend: /sla). Campos como texto; id generado en servidor. */
+export interface Sla {
+  id: string;
+  proyecto: string;
+  codigo_cliente_ssc_atencion_whatsapp: string;
+  csm_pm: string;
+  coordinador_de_convenio: string;
+  comercial: string;
+  tipo_convenio: string;
+  aliado: string;
+  equipos_del_cliente: string;
+  disponibilidad: string;
+  horario_de_atencion: string;
+  mdm_primera_atencion: string;
+  mdm_resolucion: string;
+  hardware_primera_atencion: string;
+  hardware_intervencion: string;
+  software_absoluto: string;
+  software_urgente: string;
+  software_no_urgente: string;
+}
+
 export interface Overview {
   counts: { total: number; control: number; riesgo: number; critico: number };
   avgProgress: number;

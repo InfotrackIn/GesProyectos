@@ -7,6 +7,7 @@ import { Spinner } from "./components/ui";
 import Overview from "./pages/Overview";
 import Weekly from "./pages/Weekly";
 import Surveys from "./pages/Surveys";
+import Ans from "./pages/Ans";
 import Executive from "./pages/Executive";
 import Admin from "./pages/Admin";
 import Audit from "./pages/Audit";
@@ -29,6 +30,7 @@ export default function App() {
         <Route path="/" element={<Overview />} />
         <Route path="/semanal" element={<Weekly />} />
         <Route path="/encuestas" element={<Surveys />} />
+        <Route path="/ans" element={<Ans />} />
         <Route path="/ejecutivo" element={<Executive />} />
         <Route path="/admin" element={<Admin />} />
         <Route path="/auditoria" element={<Audit />} />
