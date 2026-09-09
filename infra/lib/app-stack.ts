@@ -38,6 +38,19 @@ export class GesProyectosStack extends cdk.Stack {
       sortKey: { name: "GSI1SK", type: dynamodb.AttributeType.STRING },
     });
 
+    // ----------------------------- DynamoDB SLA -----------------------------
+    const slaTable = new dynamodb.Table(this, "SlaTable", {
+      partitionKey: { name: "id", type: dynamodb.AttributeType.STRING },
+      billingMode: dynamodb.BillingMode.PAY_PER_REQUEST,
+      pointInTimeRecoverySpecification: { pointInTimeRecoveryEnabled: true },
+      removalPolicy: cdk.RemovalPolicy.RETAIN,
+    });
+    slaTable.addGlobalSecondaryIndex({
+      indexName: "ProyectoIndex",
+      partitionKey: { name: "proyecto", type: dynamodb.AttributeType.STRING },
+      sortKey: { name: "tipo_convenio", type: dynamodb.AttributeType.STRING },
+    });
+
     // ------------------------------ Cognito -----------------------------
     const userPool = new cognito.UserPool(this, "UserPool", {
       userPoolName: "gesproyectos-users",
@@ -102,6 +115,7 @@ export class GesProyectosStack extends cdk.Stack {
       timeout: cdk.Duration.seconds(15),
       environment: {
         TABLE_NAME: table.tableName,
+        SLA_TABLE_NAME: slaTable.tableName,
         SUPABASE_URL_PARAM: supabaseUrlParam.parameterName,
         SUPABASE_ANON_KEY_PARAM: supabaseKeyParam.parameterName,
         SUPABASE_TABLE_PARAM: supabaseTableParam.parameterName,
@@ -116,6 +130,7 @@ export class GesProyectosStack extends cdk.Stack {
     });
 
     table.grantReadWriteData(apiFn);
+    slaTable.grantReadWriteData(apiFn);
     supabaseUrlParam.grantRead(apiFn);
     supabaseKeyParam.grantRead(apiFn);
     supabaseTableParam.grantRead(apiFn);
