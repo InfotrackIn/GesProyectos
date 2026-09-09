@@ -249,7 +249,6 @@ export default function Ans() {
           </div>
 
           {groups.map((group) => {
-            const sample = group.items[0];
             return (
               <Card key={group.proyecto} className="space-y-4">
                 <div className="flex flex-wrap items-start justify-between gap-2">
@@ -264,21 +263,6 @@ export default function Ans() {
                   >
                     <Plus size={14} /> Nuevo ANS
                   </button>
-                </div>
-
-                <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-                  <InfoItem label="Proyecto" value={sample.proyecto} />
-                  <InfoItem
-                    label="Codigo cliente / SSC / WhatsApp"
-                    value={sample.codigo_cliente_ssc_atencion_whatsapp}
-                  />
-                  <InfoItem label="CSM / PM" value={sample.csm_pm} />
-                  <InfoItem label="Coordinador de convenio" value={sample.coordinador_de_convenio} />
-                  <InfoItem label="Comercial" value={sample.comercial} />
-                  <InfoItem label="Aliado" value={sample.aliado} />
-                  <InfoItem label="Equipos del cliente" value={sample.equipos_del_cliente} />
-                  <InfoItem label="Disponibilidad" value={sample.disponibilidad} />
-                  <InfoItem label="Horario de atencion" value={sample.horario_de_atencion} />
                 </div>
 
                 <div className="border-t border-slate-100 pt-4">
@@ -335,6 +319,7 @@ export default function Ans() {
                           <InfoItem label="Comercial" value={sla.comercial} />
                           <InfoItem label="Aliado" value={sla.aliado} />
                           <InfoItem label="Disponibilidad" value={sla.disponibilidad} />
+                          <InfoItem label="Horario de atencion" value={sla.horario_de_atencion} />
                         </div>
 
                         <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-4">
